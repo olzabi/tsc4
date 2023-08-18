@@ -1,9 +1,6 @@
 forall X -> int is_null (X x) asm "ISNULL";
 forall X -> (tuple, ()) push_back (tuple tail, X head) asm "CONS";
 forall X -> (tuple, (X)) pop_back (tuple t) asm "UNCONS";
-forall X -> int cell_hash(cell c) asm "HASHCU";
-forall X -> slice begin_parse(cell c) asm "CTOS";
-forall X -> builder begin_cell() asm "NEWC";
 
 
 {-
@@ -36,7 +33,7 @@ forall X -> builder begin_cell() asm "NEWC";
       return c;
     }
 
-    slice sl = s~pop_back().begin_parse();
+    slice sl = c.begin_parse();
     repeat (sl.slice_refs()) {
       s~push_back(sl~load_ref());
     }
